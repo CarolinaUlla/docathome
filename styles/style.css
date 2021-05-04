@@ -79,7 +79,8 @@ body {
   font-weight: bold; }
 
 .sintomas {
-  text-align: center; }
+  text-align: center;
+  font-weight: lighter; }
 
 #cancelar-ambulancia {
   margin-top: 30px; }

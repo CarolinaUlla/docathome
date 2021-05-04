@@ -15,8 +15,8 @@ $(document).ready(function(){
         , 2000, function(){
             $('#subtitle').fadeIn('slow');
         });
-    })
-  }); 
+    });
+}); 
 
 
 //CERRAR MODALES
@@ -25,9 +25,42 @@ $('.modal-close').click (function(){
     window.location.reload();
 });
 
+//ACEPTAR ENVIO (AMBULANCIA,MEDICO A DOMICILIO, CHAT)
+$('.aceptar').click(function(){
+    window.location.reload();
+});
+
+//CONOCER INFORMACION SOBRE LOS CREADORES DE LA APLICACION
+//METODO GET AL DOCUMENTO JSON
+/*
+$('#ver-mas').click (function(){
+    $('#modal-creadores').addClass('is-active');
+    $.getJSON('datos.json', function (datos) {
+        console.log(datos);
+        $.each(datos.creadores, function(index, obj){
+            $("#contiene").append(`<li>${obj.nombre} ${obj.apellido} matrícula N. ${obj.matricula} especialista en ${obj.especialidad}</li>`);
+            $('#comunicacion').append(`<li>${obj.telefono} (${obj.apellido})`);
+        });
+    })
+})
+*/
+$('#ver-mas').click (function() {
+    $('#modal-creadores').addClass('is-active');
+    $.ajax('datos.json')
+    .done ((data) => {
+        $.each(data.creadores, function(index, obj){
+            $("#contiene").append(`<li>${obj.nombre} ${obj.apellido} matrícula N. ${obj.matricula} especialista en ${obj.especialidad}</li>`);
+            $('#comunicacion').append(`<li>${obj.telefono} (${obj.apellido})`);
+        });
+    })
+    .fail ((error)=> {
+        console.log(error);
+    });
+
+})
+
 
 //ABRIR MODAL 1 (AMBULANCIA) 
-
 
 $('#show-modal-ambulancia').click (function(){
     $('#modal-ambulancia').addClass('is-active');
@@ -38,15 +71,19 @@ $('#show-modal-ambulancia').click (function(){
 
 //COMPLETAR LA DIRECCION Y ENVIAR AMBULANCIA 
 
-$('#validar-direc').click (function(){
-    $('#modal-esperar-ambulancia').addClass('is-active');
+let direcAmb = document.getElementById('enviar-direc');
+direcAmb.addEventListener('submit', function(){
+    let direccionAmbulancia = document.getElementById('direc-ambulancia').value;
+    localStorage.setItem('direccion envio ambulancia', direccionAmbulancia);
+
+    let modalEsperarAmb = document.getElementById ('modal-esperar-ambulancia');
+    modalEsperarAmb.classList.add('is-active');
     setTimeout (function(){
-        $('#modal-envio-ambulancia').addClass('is-active');
+        let modalEnvioAmb = document.getElementById('modal-envio-ambulancia');
+        modalEnvioAmb.classList.add('is-active');
     }
     ,3000)
-
-})
-
+});
 
 //CANCELAR ENVIO DE LA AMBULANCIA
 
@@ -66,31 +103,28 @@ $('#show-modal-medico').click (function(){
 //EVALUAR SI SE TRATA DE UN CASO COVID
 //SI ES COVID, DERIVAR A CENTROS HOSPITALORIOS, SI NO ES COVID CONTINUAR CON EL FORMULARIO
 
+let formCovid = document.getElementById('form-covid');
+formCovid.addEventListener('submit', validarFormulario);
+
 function validarFormulario() {
     let opcion1 = document.getElementById('r1');
-  
     let opcion3 = document.getElementById('r3');
-  
     let opcion5 = document.getElementById('r5');
-  
     let opcion7 = document.getElementById('r7');
   
-  
     if(opcion3.checked || opcion5.checked && (opcion1.checked ||opcion3.checked || opcion5.checked || opcion7.checked)) {
-  
       $('#modal-covid').addClass('is-active');
       } else {
-          $('#modal-form').addClass('is-active');
-      };
-  };
-  
+        $('#modal-form').addClass('is-active');
+    };
+};
 
 //GUARDAR LOS DATOS EN EL LOCAL STORAGE
-let guardarForm1 = document.getElementById('form');
-guardarForm1.addEventListener('click', localStorageForm)
+let guardarForm = document.getElementById('datos');
+guardarForm.addEventListener('submit', guardarForm1);
 
-function localStorageForm (){
-
+function guardarForm1() {
+    
     let nombre = document.getElementById('nombre').value;
     localStorage.setItem('nombre', nombre);
     let apellido = document.getElementById('apellido').value;
@@ -140,7 +174,7 @@ function localStorageForm (){
 $('#datos-incorrectos').click (function(){
     $('#modal-confirmar-datos').removeClass('is-active');
 
-})
+});
 
 
 //SI LOS DATOS SON CORRECTOS, ELEGIR AREA MEDICA
@@ -286,40 +320,41 @@ $('#show-modal-online').click(function(){
 });
 
 
+// MODAL ATENCION MEDICA ONLINE (PREGUNTAR EL AREA DE INTERES)
 
-    // MODAL ATENCION MEDICA ONLINE (PREGUNTAR EL AREA DE INTERES)
-    function Especialista (id,nombre,apellido,especialidad, turno) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.especialidad = especialidad;
-        this.turno = turno;
-    };
-    const especialista1 = new Especialista ('1','Lucía', 'Allende','Clínica', '09:00');
-    const especialista2 = new Especialista ('2','Florencia', 'Sandoni', 'Gastroenterología', '10:30');
-    const especialista3 = new Especialista ('3','Sergio', 'Gutierrez', 'Psiquiatría', '14:00');
-    const especialista4 = new Especialista ('4','Camila', 'Toreso','Neurología', '17:00');
-    const especialista5 = new Especialista ('5','Augusto', 'Santos', 'Pediatría', '11:20');
-    const especialista6 = new Especialista ('6','Consuelo', 'Ferreyra','Traumatología', '10:15');
-    const especialista7 = new Especialista ('7','Nicolas', 'Torresan','Cardiología', '18:30');
+function Especialista (id,nombre,apellido,especialidad, turno) {
+    this.id = id;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.especialidad = especialidad;
+    this.turno = turno;
+};
+
+const especialista1 = new Especialista ('1','Lucía', 'Allende','Clínica', '09:00');
+const especialista2 = new Especialista ('2','Florencia', 'Sandoni', 'Gastroenterología', '10:30');
+const especialista3 = new Especialista ('3','Sergio', 'Gutierrez', 'Psiquiatría', '14:00');
+const especialista4 = new Especialista ('4','Camila', 'Toreso','Neurología', '17:00');
+const especialista5 = new Especialista ('5','Augusto', 'Santos', 'Pediatría', '11:20');
+const especialista6 = new Especialista ('6','Consuelo', 'Ferreyra','Traumatología', '10:15');
+const especialista7 = new Especialista ('7','Nicolas', 'Torresan','Cardiología', '18:30');
     
-    const arrayEsp = [especialista1, especialista2, especialista3, especialista4, especialista5, especialista6, especialista7];
+const arrayEsp = [especialista1, especialista2, especialista3, especialista4, especialista5, especialista6, especialista7];
     
-    localStorage.setItem('especialista1', JSON.stringify(especialista1));
-    localStorage.setItem('especialista2', JSON.stringify(especialista2));
-    localStorage.setItem('especialista3', JSON.stringify(especialista3));
-    localStorage.setItem('especialista4', JSON.stringify(especialista4));
-    localStorage.setItem('especialista5', JSON.stringify(especialista5));
-    localStorage.setItem('especialista6', JSON.stringify(especialista6));
-    localStorage.setItem('especialista7', JSON.stringify(especialista7));
+localStorage.setItem('especialista1', JSON.stringify(especialista1));
+localStorage.setItem('especialista2', JSON.stringify(especialista2));
+localStorage.setItem('especialista3', JSON.stringify(especialista3));
+localStorage.setItem('especialista4', JSON.stringify(especialista4));
+localStorage.setItem('especialista5', JSON.stringify(especialista5));
+localStorage.setItem('especialista6', JSON.stringify(especialista6));
+localStorage.setItem('especialista7', JSON.stringify(especialista7));
     
-    for (let i = 0; i < arrayEsp.length; i++) {
-        let nuevoDiv = document.createElement('li');
-        nuevoDiv.textContent = `${arrayEsp[i].id}) ${arrayEsp[i].especialidad}: ${arrayEsp[i].nombre} ${arrayEsp[i].apellido} próximo turno online disponible: ${arrayEsp[i].turno}`;
-        divContenedor = document.getElementById('cont');
-        nuevoDiv.classList.add('lista');
-        divContenedor.appendChild(nuevoDiv);
-    };
+for (let i = 0; i < arrayEsp.length; i++) {
+    let nuevoDiv = document.createElement('li');
+    nuevoDiv.textContent = `${arrayEsp[i].id}) ${arrayEsp[i].especialidad}: ${arrayEsp[i].nombre} ${arrayEsp[i].apellido} próximo turno online disponible: ${arrayEsp[i].turno}`;
+    divContenedor = document.getElementById('cont');
+    nuevoDiv.classList.add('lista');
+    divContenedor.appendChild(nuevoDiv);
+};
 
 //ABRIR MODAL CHAT
 
