@@ -1,3 +1,8 @@
+// SCROLL BAR
+document.addEventListener("DOMContentLoaded", function() {
+    OverlayScrollbars(document.querySelectorAll("body"), { });
+});
+
 //NAV BAR BURGER
 
 let boton_nav = document.querySelector('.navbar-burger');
@@ -27,7 +32,9 @@ $('.modal-close').click (function(){
 
 //ACEPTAR ENVIO (AMBULANCIA,MEDICO A DOMICILIO, CHAT)
 $('.aceptar').click(function(){
-    window.location.reload();
+    setTimeout(function(){
+        window.location.reload();
+    },3000);
 });
 
 //CONOCER INFORMACION SOBRE LOS CREADORES DE LA APLICACION
@@ -50,7 +57,7 @@ $('#ver-mas').click (function() {
     .done ((data) => {
         $.each(data.creadores, function(index, obj){
             $("#contiene").append(`<li>${obj.nombre} ${obj.apellido} matrícula N. ${obj.matricula} especialista en ${obj.especialidad}</li>`);
-            $('#comunicacion').append(`<li>${obj.telefono} (${obj.apellido})`);
+            $('#comunicacion').append(`<li>${obj.telefono} ${obj.email}`);
         });
     })
     .fail ((error)=> {
@@ -64,7 +71,7 @@ $('#ver-mas').click (function() {
 
 $('#show-modal-ambulancia').click (function(){
     $('#modal-ambulancia').addClass('is-active');
-    $('#modal-ambulancia').toggle('slow');
+   // $('#modal-ambulancia').toggle('slow');
 })
 
 
@@ -85,10 +92,18 @@ direcAmb.addEventListener('submit', function(){
     ,3000)
 });
 
+$('#aceptar-ambulancia').click(function(){
+    setTimeout(function(){
+        window.location.reload();
+    },3000)
+});
+
 //CANCELAR ENVIO DE LA AMBULANCIA
 
 $('#cancelar-ambulancia').click (function(){
-    $('#modal-cancelar-ambulancia').addClass('is-active');
+    setTimeout(function(){
+        $('#modal-cancelar-ambulancia').addClass('is-active');
+    },3000);
 });
 
 
@@ -96,7 +111,7 @@ $('#cancelar-ambulancia').click (function(){
 
 $('#show-modal-medico').click (function(){
     $('#modal-descartar-covid').addClass('is-active')
-    $('#modal-descartar-covid').toggle('slow');
+   // $('#modal-descartar-covid').toggle('slow');
 });
 
 
@@ -168,6 +183,13 @@ function guardarForm1() {
     let nuevoObra = document.getElementById('check-o');
     nuevoObra.innerText = `Obra social: ${localStorage.getItem('obra social')}`;
 };
+
+//GUARDAR OTRA OBRA SOCIAL EN EL LOCAL STORAGE
+let enviarOtraObra = document.getElementById('datos-correctos');
+enviarOtraObra.addEventListener('click', function(){
+    let otraObra = document.getElementById('check-os').value;
+    localStorage.setItem('otra obra social', otraObra);
+});
 
 //SI LOS DATOS NO SON CORRECTOS, MODIFICARLOS
 
@@ -305,10 +327,20 @@ function mostrarCardio () {
 
 };
 
+
+//ACEPTAR MEDICO A DOMICILIO 
+$('#aceptar-medico').click(function(){
+    setTimeout(function(){
+        window.location.reload();
+    },3000)
+});
+
 //CANCELAR MEDICO A DOMICILIO
 
 $('#cancelar-medico').click (function(){
-    $('#modal-cancelar-medico').addClass('is-active');
+    setTimeout(function(){
+        $('#modal-cancelar-medico').addClass('is-active');
+    },3000)
 });
 
 
@@ -316,62 +348,107 @@ $('#cancelar-medico').click (function(){
 
 $('#show-modal-online').click(function(){
     $('#modal-atencion-online').addClass('is-active');
-    $('#modal-atencion-online').toggle('slow');
+   // $('#modal-atencion-online').toggle('slow');
 });
 
 
-// MODAL ATENCION MEDICA ONLINE (PREGUNTAR EL AREA DE INTERES)
+// MODAL ATENCION MEDICA ONLINE (MOSTRAR TURNOS DISPONIBLES)
 
-function Especialista (id,nombre,apellido,especialidad, turno) {
+function Especialista (id, nombre,apellido,especialidad) {
     this.id = id;
     this.nombre = nombre;
     this.apellido = apellido;
     this.especialidad = especialidad;
-    this.turno = turno;
 };
 
-const especialista1 = new Especialista ('1','Lucía', 'Allende','Clínica', '09:00');
-const especialista2 = new Especialista ('2','Florencia', 'Sandoni', 'Gastroenterología', '10:30');
-const especialista3 = new Especialista ('3','Sergio', 'Gutierrez', 'Psiquiatría', '14:00');
-const especialista4 = new Especialista ('4','Camila', 'Toreso','Neurología', '17:00');
-const especialista5 = new Especialista ('5','Augusto', 'Santos', 'Pediatría', '11:20');
-const especialista6 = new Especialista ('6','Consuelo', 'Ferreyra','Traumatología', '10:15');
-const especialista7 = new Especialista ('7','Nicolas', 'Torresan','Cardiología', '18:30');
-    
+const especialista1 = new Especialista ('1', 'Lucía', 'Allende','clínica');
+const especialista2 = new Especialista ('2','Florencia', 'Sandoni', 'gastroenterología');
+const especialista3 = new Especialista ('3','Sergio', 'Gutierrez', 'psiquiatría');
+const especialista4 = new Especialista ('4','Camila', 'Toreso','neurología');
+const especialista5 = new Especialista ('5','Augusto', 'Santos', 'pediatría');
+const especialista6 = new Especialista ('6','Consuelo', 'Ferreyra','traumatología');
+const especialista7 = new Especialista ('7','Nicolas', 'Torresan','cardiología');
+
 const arrayEsp = [especialista1, especialista2, especialista3, especialista4, especialista5, especialista6, especialista7];
     
-localStorage.setItem('especialista1', JSON.stringify(especialista1));
-localStorage.setItem('especialista2', JSON.stringify(especialista2));
-localStorage.setItem('especialista3', JSON.stringify(especialista3));
-localStorage.setItem('especialista4', JSON.stringify(especialista4));
-localStorage.setItem('especialista5', JSON.stringify(especialista5));
-localStorage.setItem('especialista6', JSON.stringify(especialista6));
-localStorage.setItem('especialista7', JSON.stringify(especialista7));
-    
+
+
+
 for (let i = 0; i < arrayEsp.length; i++) {
-    let nuevoDiv = document.createElement('li');
-    nuevoDiv.textContent = `${arrayEsp[i].id}) ${arrayEsp[i].especialidad}: ${arrayEsp[i].nombre} ${arrayEsp[i].apellido} próximo turno online disponible: ${arrayEsp[i].turno}`;
+    let nuevoDiv = document.createElement('p');
+    nuevoDiv.textContent = `${arrayEsp[i].id}) ${arrayEsp[i].especialidad}`;
     divContenedor = document.getElementById('cont');
     nuevoDiv.classList.add('lista');
     divContenedor.appendChild(nuevoDiv);
 };
 
+
+
+$(document).keydown(function (tecla) {
+    $('#continue').click (function(){
+        $('#modal-atencion-online2').addClass('is-active');
+    })
+    switch(tecla.keyCode) {
+        case 49:
+            console.log('telca 1');
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista1.especialidad}: DR. ${especialista1.nombre} ${especialista1.apellido}`;
+            break;
+        case 50:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista2.especialidad}: DR. ${especialista2.nombre} ${especialista2.apellido}`;
+            break;
+        case 51:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista3.especialidad}: DR. ${especialista3.nombre} ${especialista3.apellido}`;
+            break;
+        case 52:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista4.especialidad}: DR. ${especialista4.nombre} ${especialista4.apellido}`;
+            break;
+        case 53:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista5.especialidad}: DR. ${especialista5.nombre} ${especialista5.apellido}`;
+            break;
+        case 54:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista6.especialidad}: DR. ${especialista6.nombre} ${especialista6.apellido}`;
+            break;
+        case 55:
+            document.getElementById('contenedor-turno').textContent = `Area ${especialista7.especialidad}: DR. ${especialista7.nombre} ${especialista7.apellido}`;
+            break;
+        default:
+            document.getElementById('contenedor-turno').textContent = 'El número ingresado es incorrecto, por favor vuelva a intentarlo';
+            document.getElementById('contenedor-random').style.display = 'none';
+            document.getElementById('ir-chat').style.display = 'none';
+            document.getElementById('cancel').style.display = 'none';
+            break;
+    }
+
+});
+
+function horarioRandom() {
+    const turnos = ["10:30hs", "14:20hs", "15:45hs", "11:50hs", "18:30hs", "9:25hs", "8:50hs", "17:00hs"];
+    const random = Math.floor(Math.random() * turnos.length);
+    const contiene = document.getElementById ('contenedor-random');
+    const rta = document.createElement('p');
+    rta.innerText = `Horario del turno: ${turnos[random]}`;
+    contiene.appendChild(rta);
+}
+
+horarioRandom();
+
 //ABRIR MODAL CHAT
 
-$('#continue').click (function(){
+$('#ir-chat').click (function(){
     $('#modal-chat').addClass('is-active');
     $('#modal-atencion-online').removeClass('is-active');
 
     setTimeout(function(){ 
         $('#open-button').removeAttr('disabled');
         $('#open-button').addClass('is-info');
-        $('#open-button').addClass('is-large');
     }, 5000);
 });
+
 
 $('#open-button').click(function(){
     $('#modal-chat-ready').addClass('is-active');
     $('#modal-chat').removeClass('is-active');
+    $('#modal-atencion-online2').removeClass('is-active');
     $('#myForm').css("display","block");
 });
 
@@ -396,5 +473,21 @@ botonEnviar.addEventListener('click', function(){
 
 //CANCELAR CHAT
 $('#cancel').click(function(){
-    $('#modal-cancelar-chat').addClass('is-active');
+    setTimeout(function(){
+        $('#modal-cancelar-chat').addClass('is-active');
+    },3000);
+});
+
+
+$('#cancelar-chat').click(function(){
+    setTimeout(function(){
+        $('#modal-cancelar-chat').addClass('is-active');
+    },3000);
+})
+
+
+$('#cancelar-turno-online').click( function(){
+    setTimeout(function(){
+        $('#modal-cancelar-chat').addClass('is-active');
+    },3000)
 });

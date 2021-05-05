@@ -179,14 +179,15 @@
             <div class="content">
               <p class="decoracion"> LOS CREADORES </p>
               <ul id="contiene"></ul>
-              <p>Teléfonos de contacto:</p>
-              <ul id="comunicacion"></div>
+              <p>Contacto:</p>
+              <ul id="comunicacion">
             </div>
           </div>
         </div>
-        <button class="modal-close is-large" aria-label="close"></button>
       </div>
-    </section>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+  </section>
   
   <section id="seguinos">
     <div class="content has-text-centered">
@@ -201,30 +202,36 @@
   </section>
 
   <!-- MODAL AMBULANCIA --> 
+
   <section>
-    <div id="modal-ambulancia" class="modal" style="display: none;">
+    <article class="message is-small modal" id="modal-ambulancia">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
-          <div class="media-content" id="centrar-direc">
-            <div class="content">
-              <form onsubmit="return false;" id="enviar-direc">
-                <div class="field">
-                  <label class="label">A continuación escriba su dirección</label>
-                  <p class="control has-icons-left">
+        <div class="media-content" id="centrar-direc">
+          <div class="content">
+            <form onsubmit="return false;" id="enviar-direc">
+              <div class="message-header">
+                <p>A continuación escriba su dirección:</p>
+              </div>
+              <div class="message-body is-info box">
+                <div class="field has-addons">
+                  <div class="control has-icons-left is-expanded">
                     <input class="input is-hovered is-medium" type="text" id="direc-ambulancia" required>
                     <span class="icon is-small is-left">
                       <i class="fas fa-map-pin"></i>
                     </span>
-                  </p>
+                  </div> 
+                  <div class="control">
+                    <input type="submit" class="button is-link is-medium" id="validar-direc">
+                  </div>
                 </div>
-                <input type="submit" class="button is-link" id="validar-direc"> <button class="modal-close is-large" aria-label="close"></button>
-              </form>
-            </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   </section>
   
   <section>
@@ -242,20 +249,27 @@
       </div>
     </div>
   </section>
-  
+
   <section>
-    <div id="modal-envio-ambulancia" class="modal">
+    <article class="message modal" id="modal-envio-ambulancia">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box" id="centrar-map">
-          <p class="bold" id="titulo-ambulancia"> LA AMBULANCIA YA ESTA EN CAMINO </p>
+        <div class="message-header">
+          <p>LA AMBULANCIA YA ESTA EN CAMINO</p>
+        </div>
+        <div class="message-body box">
           <img src="img/MAP.jpg">
-          <button class="button is-success aceptar">ACEPTAR AMBULANCIA</button>
-          <button class="button is-danger" id="cancelar-ambulancia">CANCELAR ENVIO</button>
+          <div class="field is-grouped" id="botones-ambulancia">
+            <p class="control">
+              <button class="button is-link" id="aceptar-ambulancia">ACEPTAR ENVIO</button>
+            </p>
+            <p class="control">
+              <button class="button is-danger" id="cancelar-ambulancia">CANCELAR ENVIO</button>
+            </p>
+          </div>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
   
   <section>
@@ -276,96 +290,103 @@
     
   <!-- MODAL MEDICO ONLINE --> 
   <section>
-    <div id="modal-descartar-covid" class="modal" style="display: none;">
+    <article class="message modal" id="modal-descartar-covid">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
-          <div class="media-content" id="formulario">
-            <div class="content">
-              <p class="decoracion"> Complete el formulario a continuación: </p>
+        <div class="media-content" id="formulario">
+          <div class="content">
+            <div class="message-header">
+              <p> Complete el formulario a continuación: </p>
             </div>
-            <form onsubmit="return false;" id="form-covid">
-              <div class="field">
-                <label class="label">Tómese la temperatura, tiene más de 37.5?</label>
-                <div class="control" id= 'preg1'>
-                  <input type="radio" name="preg1" id="r1" value="SI">SI <br>
-                  <input type="radio" name="preg1" id="r2" value="NO" required>NO
+            <div class="message-body box">
+              <form onsubmit="return false;" id="form-covid">
+                <div class="field">
+                  <label class="label">Tómese la temperatura, tiene más de 37.5?</label>
+                  <div class="control" id= 'preg1'>
+                    <input type="radio" name="preg1" id="r1" value="SI">SI <br>
+                    <input type="radio" name="preg1" id="r2" value="NO" required>NO
+                  </div>
                 </div>
-              </div>
-              <div class="field">
-                <label class="label">Percibiste una marcada pérdida del olfato de manera repentina?</label>
-                <div class="control" id="preg2">
-                  <input type="radio"  name="preg2" id="r3" value="SI">SI <br>
-                  <input type="radio"  name="preg2" id="r4" value="NO" required>NO
+                <div class="field">
+                  <label class="label">Percibiste una marcada pérdida del olfato de manera repentina?</label>
+                  <div class="control" id="preg2">
+                    <input type="radio"  name="preg2" id="r3" value="SI">SI <br>
+                    <input type="radio"  name="preg2" id="r4" value="NO" required>NO
+                  </div>
+                </div> 
+                <div class="field">
+                  <label class="label">Percibiste una marcada pérdida del gusto de manera repentina?</label>
+                  <div class="control" id="preg3">
+                    <input type="radio" name="preg3" id="r5" value="SI"><label for="r1">SI</label> <br>
+                    <input type="radio" name="preg3" id="r6" value="NO" required><label for="r2">NO</label>
+                  </div>
                 </div>
-              </div> 
-              <div class="field">
-                <label class="label">Percibiste una marcada pérdida del gusto de manera repentina?</label>
-                <div class="control" id="preg3">
-                  <input type="radio" name="preg3" id="r5" value="SI"><label for="r1">SI</label> <br>
-                  <input type="radio" name="preg3" id="r6" value="NO" required><label for="r2">NO</label>
+                <div class="field">
+                  <label class="label">Tenés dificultad respiratoria o falta de aire?</label>
+                  <div class="control" id="preg4">
+                    <input type="radio" name="preg4" id="r7" value="SI"><label for="r1">SI</label> <br>
+                    <input type="radio" name="preg4" id="r8" value="NO" required><label for="r2">NO</label>
+                  </div>
                 </div>
-              </div>
-              <div class="field">
-                <label class="label">Tenés dificultad respiratoria o falta de aire?</label>
-                <div class="control" id="preg4">
-                  <input type="radio" name="preg4" id="r7" value="SI"><label for="r1">SI</label> <br>
-                  <input type="radio" name="preg4" id="r8" value="NO" required><label for="r2">NO</label>
-                </div>
-              </div>
-              <input type="submit" class="button is-link modal-button" class="boton" id="descartar">
-            </form>
+                <input type="submit" class="button is-link modal-button" class="boton" id="descartar">
+              </form>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
           </div>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
 
   <section>
-    <div id="modal-covid" class="modal">
+    <article class="message is-danger modal" id="modal-covid">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
-          <div class="media-content">
-            <div class="content" id="img-covid">
-              <img src="img/sintomas covid.png">
+        <div class="message-header">
+          <p>Registramos síntomas de Covid-19</p>
+        </div>
+        <div class="message-body box">
+          <p>Tienes uno o más de los siguientes síntomas: fiebre de 37,5°C, dificultad respiratoria, pérdida brusca de gusto u olfato. Estos síntomas pueden ir acompañados de otros (dolor de cabeza, vómitos, diarrea, dolor muscular). Actualmente no ofrecemos servicio a domicilio para Covid-19, si los síntomas empeoran, acercate al hospital de campaña más cercano:</p> <br>
+          <div class="dropdown is-hoverable is-up">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>VER MAS</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-up" aria-hidden="true"></i>
+                </span>
+              </button>
             </div>
-            <article class="message">
-              <div class="message-header">
-                <p class="sintomas">Registramos que tienes uno o más de los siguientes síntomas: fiebre de 37,5°C, dificultad respiratoria, pérdida brusca de gusto u olfato. Actualmente no ofrecemos servicio a domicilio para Covid-19, si los síntomas empeoran, acercate al hospital de campaña más cercano:</p> 
-              </div>
-              <div class="message-body">
-                <div class="tags">
-                  <span class="tag is-black">HOSPITAL RAWSON</span>
-                  <span class="tag is-black">HOSPITAL MISERICORDIA</span>
-                  <span class="tag is-black">HOSPITAL TRANSITO CASERES</span>
-                  <span class="tag is-black">HOSPITAL ITALIANO</span>
-                  <span class="tag is-black">HOSPITAL PRIVADO</span>
-                  <span class="tag is-black">SANATORIO ALLENDE</span>
-                  <span class="tag is-black">CLINICA EL SOL</span>
-                  <span class="tag is-black">CLINICA EL SALVADOR</span>
-                  <span class="tag is-black">HOSPITAL DE NIÑOS</span>
-                  <span class="tag is-black">HOSPITAL CORDOBA</span>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content is-hovered">
+                <div class="dropdown-item">
+                  <p>HOSPITAL RAWSON</p>
+                  <p>HOSPITAL MISERICORDIA</p>
+                  <p>HOSPITAL TRANSITO CASERES</p>
+                  <p>HOSPITAL ITALIANO</p>
+                  <p>HOSPITAL PRIVADO</p>
+                  <p>SANATORIO ALLENDE</p>
+                  <p>HOSPITAL DE NIÑOS</p>
+                  <p>HOSPITAL CORDOBA</p>
                 </div>
               </div>
-            </article>
+            </div>
           </div>
+             
         </div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
 
   <section>
-    <div id="modal-form" class="modal">
+    <article class="message modal" id="modal-form">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
+        <div class="message-header">
+          <p>Complete el formulario a continuación: </p>
+        </div>
+        <div class="message-body box">
           <div class="media-content">
-            <div class="content">
-              <p class="decoracion"> Complete el formulario a continuación: </p>
-            </div>
             <form onsubmit="return false;" id="datos">
               <div class="field">
                 <label class="label">Nombre</label>
@@ -421,19 +442,21 @@
             </form>
           </div>
         </div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
 
   <section>
-    <div id="modal-confirmar-datos" class="modal">
+    <article class="message modal" id="modal-confirmar-datos">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
+        <div class="message-header">
+          <p>Tus datos son correctos?</p>
+        </div>
+        <div class="message-body box">
           <div class="media-content">
             <div class="content" id="contenedor-datos">
-              <p class="decoracion"> Tus datos son correctos?</p>
               <p id="check-n"></p>
               <p id="check-a"></p>
               <p id="check-doc"></p>
@@ -441,83 +464,106 @@
               <p id="check-f"></p>
               <p id="check-t"></p>
               <p id="check-o"></p>
+              <label>Si seleccionaste "otra", especificar la obra social a continuación:</label>
+              <input class="input" type="text" id="check-os">
             </div>
-            <div class="buttons">
-              <button class="button is-link is-light" id="datos-correctos">SI</button>
-              <button class="button is-danger is-light" id="datos-incorrectos" >NO</button>
+            <div class="field is-grouped" id="botones-datos">
+              <p class="control">
+                <button class="button is-link" id="datos-correctos">
+                  SI
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-danger" id="datos-incorrectos">
+                  NO
+                </button>
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   </section>
   
   <section>
-    <div id="modal-areas" class="modal">
+    <article class="message modal" id="modal-areas">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
+        <div class="message-header">
+          <p> A qué <span class="palabra"> especialidad</span> deseas consultar?</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body box">
           <div class="media-content">
-            <div class="content" id="contenedor-especialidad">
-              <p> A qué <span class="palabra"> especialidad</span> deseas consultar?</p>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="clinico"> Clínica
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="gastro"> Gastroenterología
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="psiq"> Psiquiatría
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="neuro"> Neurología
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="ped"> Pediatría
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="trau"> Traumatología
-                </label>
-              </div>
-              <div class="field">
-                <label class="radio">
-                  <input type="radio" name="area" id="cardio"> Cardiología
-                </label>
-              </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="clinico"> Clínica
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="gastro"> Gastroenterología
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="psiq"> Psiquiatría
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="neuro"> Neurología
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="ped"> Pediatría
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="trau"> Traumatología
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input type="radio" name="area" id="cardio"> Cardiología
+              </label>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   </section>
-  
+
   <section>
-    <div id="modal-especialistas" class="modal">
+    <article class="message modal" id="modal-especialistas">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
+        <div class="message-header">
+          <p>Médico en camino</p>
+        </div>
+        <div class="message-body box">
           <div class="media-content" id="centrar-med">
             <div class="content" id="contenedor-especialistas">
             </div>
-            <button class="button is-success aceptar">ACEPTAR VISITA</button>
-            <br>
-            <button class="button is-danger" id="cancelar-medico">CANCELAR VISITA</button>
+            <div class="field is-grouped" id="botones-domicilio">
+              <p class="control">
+                <button class="button is-link" id="aceptar-medico">
+                  ACEPTAR VISITA
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-danger" id="cancelar-medico">
+                  CANCELAR VISITA
+                </button>
+              </p>
+            </div>
           </div>
         </div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
 
   <section>
@@ -539,49 +585,81 @@
   <!-- MODAL ATENCION ONLINE --> 
 
   <section>
-    <div id="modal-atencion-online" class="modal" style="display: none;">
+    <article class="message modal" id="modal-atencion-online">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
-          <div class="media-content">
-            <div class="content">
-              <strong><p> Actualmente contamos con los siguientes especialistas para atender una consulta online: </p></strong>
-            </div>
-            <div id="cont"></div>
-          </div>
-          <div class="select">
-            <select>
-              <option>Seleccione el número del turno elegido</option>
-              <option>1) Clínica</option>
-              <option>2) Gastroenterología</option>
-              <option>3) Psiquiatría</option>
-              <option>4) Neurología</option>
-              <option>5) Pediatría</option>
-              <option>6) Traumatología</option>
-              <option>7) Cardiología</option>
-            </select>
-          </div>
-          <button class="button is-link is-light" id="continue">OK</button>
-          <button class="button is-danger is-light" id="cancel">CANCELAR</button>
+        <div class="message-header">
+          <p>Ingrese el número del área que desea consultar:</p>
         </div>
+        <div class="message-body box">
+          <div class="media-content">
+            <div id="cont"></div>
+            <div class="field has-addons">
+              <div class="control">
+                <input class="input" type="number" id="numero-ingresado">
+              </div>
+              <div class="control">
+                <button class="button is-link" id="continue">
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
   </section>
 
   <section>
-    <div id="modal-chat" class="modal">
+    <article class="message is-link modal" id="modal-atencion-online2">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
-          <div class="content">
-            <p>En el horario de turno asignado, se habilitará el botón "chat"</p>
-            <button class="button" id="open-button" disabled>Chat</button>
+        <div class="content">
+          <div class="message-header">
+            <p>Se le ha asignado el siguiente turno:</p>
+          </div>
+          <div class="message-body box">
+            <p id="contenedor-turno"></p>
+            <p id="contenedor-random"></p>
+            <div class="field is-grouped" id="botones-chat">
+              <p class="control">
+                <button class="button is-link" id="ir-chat">ACEPTAR</button>
+              </p>
+              <p class="control">
+                <button class="button is-danger" id="cancelar-chat">CANCELAR</button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </article>
+  </section>
+
+  <section>
+    <article class="message modal" id="modal-chat">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="message-header">
+          <p>En el horario de turno asignado, se habilitará el botón "chat"</p>
+        </div>
+        <div class="message-body box">
+          <div class="field is-grouped" id="botones-chatear">
+            <p class="control">
+              <button class="button" id="open-button" disabled>
+                CHAT
+              </button>
+            </p>
+            <p class="control">
+              <button class="button is-danger" id="cancelar-turno-online">
+                CANCELAR
+              </button>
+            </p>
+          </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+    </article>
   </section>
 
   <section>
@@ -614,7 +692,7 @@
         <div class="box">
           <div class="media-content">
             <div class="content">
-              <p class="bold"> NO HAS TOMADO NINGUN TURNO ONLINE </p>
+              <p class="bold">TURNO ONLINE CANCELADO </p>
             </div>
           </div>
         </div>
@@ -625,6 +703,7 @@
   
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>  
   <script src="script/script.js"></script>
 </body>
 </html>

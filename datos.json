@@ -4,12 +4,14 @@
         "apellido": "Estevez",
         "matricula": 2354,
         "especialidad": "Neurología",
-        "telefono": "011-23438876"
+        "telefono": "011-23438876",
+        "email": "mariaestevez@gmail.com"
     }, {
         "nombre": "Doctor Juan Ignacio",
         "apellido": "Gasquez",
         "matricula": 3421,
         "especialidad": "Neurología",
-        "telefono": "351-153234542"
+        "telefono": "351-153234542",
+        "email": "juanigasquez@gmail.com"
     }]
 }
