@@ -38,19 +38,7 @@ $('.aceptar').click(function(){
 });
 
 //CONOCER INFORMACION SOBRE LOS CREADORES DE LA APLICACION
-//METODO GET AL DOCUMENTO JSON
-/*
-$('#ver-mas').click (function(){
-    $('#modal-creadores').addClass('is-active');
-    $.getJSON('datos.json', function (datos) {
-        console.log(datos);
-        $.each(datos.creadores, function(index, obj){
-            $("#contiene").append(`<li>${obj.nombre} ${obj.apellido} matrícula N. ${obj.matricula} especialista en ${obj.especialidad}</li>`);
-            $('#comunicacion').append(`<li>${obj.telefono} (${obj.apellido})`);
-        });
-    })
-})
-*/
+
 $('#ver-mas').click (function() {
     $('#modal-creadores').addClass('is-active');
     $.ajax('datos.json')
@@ -71,9 +59,7 @@ $('#ver-mas').click (function() {
 
 $('#show-modal-ambulancia').click (function(){
     $('#modal-ambulancia').addClass('is-active');
-   // $('#modal-ambulancia').toggle('slow');
 })
-
 
 
 //COMPLETAR LA DIRECCION Y ENVIAR AMBULANCIA 
@@ -111,7 +97,7 @@ $('#cancelar-ambulancia').click (function(){
 
 $('#show-modal-medico').click (function(){
     $('#modal-descartar-covid').addClass('is-active')
-   // $('#modal-descartar-covid').toggle('slow');
+
 });
 
 
@@ -135,6 +121,7 @@ function validarFormulario() {
 };
 
 //GUARDAR LOS DATOS EN EL LOCAL STORAGE
+
 let guardarForm = document.getElementById('datos');
 guardarForm.addEventListener('submit', guardarForm1);
 
@@ -155,7 +142,6 @@ function guardarForm1() {
     let obraSocial = document.getElementById('obra-social').value;
     localStorage.setItem('obra social', obraSocial);
 
-    //CONTINUAR AL SIGUIENTE MODAL
 
     let confirmarDatos = document.getElementById ('modal-confirmar-datos');
     confirmarDatos.classList.add('is-active');
@@ -185,6 +171,7 @@ function guardarForm1() {
 };
 
 //GUARDAR OTRA OBRA SOCIAL EN EL LOCAL STORAGE
+
 let enviarOtraObra = document.getElementById('datos-correctos');
 enviarOtraObra.addEventListener('click', function(){
     let otraObra = document.getElementById('check-os').value;
@@ -329,6 +316,7 @@ function mostrarCardio () {
 
 
 //ACEPTAR MEDICO A DOMICILIO 
+
 $('#aceptar-medico').click(function(){
     setTimeout(function(){
         window.location.reload();
@@ -348,11 +336,10 @@ $('#cancelar-medico').click (function(){
 
 $('#show-modal-online').click(function(){
     $('#modal-atencion-online').addClass('is-active');
-   // $('#modal-atencion-online').toggle('slow');
 });
 
 
-// MODAL ATENCION MEDICA ONLINE (MOSTRAR TURNOS DISPONIBLES)
+// MODAL ATENCION MEDICA ONLINE (MOSTRAR AREAS MEDICAS)
 
 function Especialista (id, nombre,apellido,especialidad) {
     this.id = id;
@@ -372,8 +359,6 @@ const especialista7 = new Especialista ('7','Nicolas', 'Torresan','cardiología'
 const arrayEsp = [especialista1, especialista2, especialista3, especialista4, especialista5, especialista6, especialista7];
     
 
-
-
 for (let i = 0; i < arrayEsp.length; i++) {
     let nuevoDiv = document.createElement('p');
     nuevoDiv.textContent = `${arrayEsp[i].id}) ${arrayEsp[i].especialidad}`;
@@ -382,15 +367,14 @@ for (let i = 0; i < arrayEsp.length; i++) {
     divContenedor.appendChild(nuevoDiv);
 };
 
+//ESCUCHAR EL NUMERO INGRESADO, Y DAR TURNO EN LA ESPECIALIDAD ELEGIDA
 
-
-$(document).keydown(function (tecla) {
+$('#modal-atencion-online').keydown(function (tecla) {
     $('#continue').click (function(){
         $('#modal-atencion-online2').addClass('is-active');
     })
     switch(tecla.keyCode) {
         case 49:
-            console.log('telca 1');
             document.getElementById('contenedor-turno').textContent = `Area ${especialista1.especialidad}: DR. ${especialista1.nombre} ${especialista1.apellido}`;
             break;
         case 50:
@@ -415,11 +399,12 @@ $(document).keydown(function (tecla) {
             document.getElementById('contenedor-turno').textContent = 'El número ingresado es incorrecto, por favor vuelva a intentarlo';
             document.getElementById('contenedor-random').style.display = 'none';
             document.getElementById('ir-chat').style.display = 'none';
-            document.getElementById('cancel').style.display = 'none';
             break;
     }
 
 });
+
+//DAR TURNOS RANDOM
 
 function horarioRandom() {
     const turnos = ["10:30hs", "14:20hs", "15:45hs", "11:50hs", "18:30hs", "9:25hs", "8:50hs", "17:00hs"];
