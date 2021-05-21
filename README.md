@@ -1,7 +1,8 @@
 # docathome
-Proyecto final para el curso Javascript de Coderhouse.
-Tecnologías utilizadas: html, sass, javascript, jquery. El mismo está diseñado con Bulma, framework de css.
-El proyecto es 100% responsive, se adapta a cualquier pantalla.
-El objetivo de la web es la consulta a un médico de manera online, ya sea para pedir una ambulancia, para pedir un médico especializado en las necesidades del paciente en su hogar, o para tener una consulta online.
+Final project for the Coderhouse Javascript course.
+Technologies used: html, sass, javascript, jquery. It is designed with Bulma, a css framework.
+The project is 100% responsive, it adapts to any screen.
+The objective of the website is to consult a doctor online, either to request an ambulance, to request a doctor who specializes in the needs of the patient at home, or to have an online consultation.
 
-DOMINIO: https://carolinaulla.github.io/docathome/
+
+URL: https://carolinaulla.github.io/docathome/
