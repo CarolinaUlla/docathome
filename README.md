@@ -1,4 +1,4 @@
-# docathome
+# #Doc At Home 👩‍⚕️👨‍⚕️
 Final project for the Coderhouse Javascript course.
 Technologies used: html, sass, javascript, jquery. It is designed with Bulma, a css framework.
 The project is 100% responsive, it adapts to any screen.
